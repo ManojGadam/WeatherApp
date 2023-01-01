@@ -1,0 +1,7 @@
+.body
+{
+    height: 100vh;
+    background-color: hsl(200, 100%, 85%);
+    color: hsl(200, 100%, 10%);
+    font-family: sans-serif;
+}
