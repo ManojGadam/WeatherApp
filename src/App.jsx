@@ -9,12 +9,16 @@ import { useEffect, useState } from 'react'
 import {ICON_MAP} from './Icongiver'
 function App() {
   const [pageData,setPageData]=useState([{}]);
+  const [cords,setCords]=useState({latitude:0,longitude:0});
+  navigator.geolocation.getCurrentPosition(()=>setCords({latitude:coords.latitude,longitude:coords.longitude}),posFailure)
+  function posFailure({coords}){
+    alert("There was an error getting the location.Allow to use the location")
+  }
   useEffect(()=>{
-    getWeatherData(39.77,-86.16,Intl.DateTimeFormat().resolvedOptions().timeZone).then((res)=>{
-      console.log(res)
+    getWeatherData(cords.latitude,cords.longitude,Intl.DateTimeFormat().resolvedOptions().timeZone).then((res)=>{
       setPageData(res)
     })
-  },[])
+  },[cords])
   const Day_formatter = new Intl.DateTimeFormat(undefined,{weekday:"long"})
   var current = pageData.current;
   var daily = pageData.daily;
